@@ -262,7 +262,7 @@ summary(girls)
     ## F-statistic: 5.528 on 1 and 63 DF,  p-value: 0.02186
 
 ``` r
-#unpaired ttest for analysis between the groups
+#unpaired ttest for analysis between the  males and females 
 
 t.test(temp$male, temp$female, data = temp, paired = FALSE)
 ```
@@ -287,7 +287,7 @@ t.test(temp$male, temp$female, data = temp, paired = FALSE)
 
 -   t=-0.63 df=116.70 p=0.53
 
--   There is no difference between the two goups when it comes to the relationship between heart rate and body temperature. They both show the same pattern of association. We accept the null hypothesis.
+-   There is no difference between the two goups when it comes to the relationship between heart rate and body temperature. They both show the same pattern of association, that is increases in body temperature correlate with increases in heart rate. We accept the null hypothesis.
 
 ------------------------------------------------------------------------
 

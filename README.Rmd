@@ -44,12 +44,9 @@ summary(boys)
 girls<- lm(temp$female~temp$body_temperature)
 summary(girls)
 
-#unpaired ttest for analysis between the groups
+#unpaired ttest for analysis between the  males and females 
 
 t.test(temp$male, temp$female, data = temp, paired = FALSE)
-
-
-
 
 
 ```
@@ -63,7 +60,7 @@ t.test(temp$male, temp$female, data = temp, paired = FALSE)
   df=116.70
   p=0.53
 
-* There is no difference between the two goups when it comes to the relationship between heart rate and body temperature. They both show the same pattern of association. We accept the null hypothesis. 
+* There is no difference between the two goups when it comes to the relationship between heart rate and body temperature. They both show the same pattern of association, that is increases in body temperature correlate with increases in heart rate. We accept the null hypothesis. 
 
 ***
 
@@ -118,7 +115,7 @@ chisq.test(intox3, correct = TRUE)
 
 ```
 
-###Outcomes
+###Outcomes 
 * 1- chisq(24.64)
     df=1
     p-value = 6.913e-07
