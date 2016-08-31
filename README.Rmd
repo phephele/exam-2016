@@ -1,0 +1,183 @@
+---
+author: "Sihle Dakile"
+title: "Stats Exam"
+output: github_document
+---
+#Question 1
+##Body Temp in Males and Females
+
+* Null Hypothesis- There is no difference in increments of body temperature between males and females.
+* Alternative Hypothesis- There is a difference in increments ofbody temperature between males and females.
+
+* The data is continuous and has two, unpaired groups. I will use an unpaired t.test for hypothesis testing. 
+
+* Test assumptions- there is equal variance across groups
+                    the data is matched
+                    the distribution is Gaussian
+                  
+* Other Questions to be answered
+    -Do changes in body temperature have an association with heart rate?
+    -Are the heart rate changes similar across the groups?
+  
+
+```{r data_import, data_tidy, echo=TRUE}
+temp <- read.csv('question1.csv')
+temp
+
+#summary statistics
+dim(temp)
+head(temp)
+tail(temp)
+summary(temp)
+
+
+#individual analyses for males and females heart rates and body temp
+plot(temp$body_temperature, temp$male)
+abline(lm(temp$male~temp$body_temperature))
+
+plot(temp$body_temperature, temp$female)
+abline(lm(temp$female~temp$body_temperature))
+
+boys<- lm(temp$male~temp$body_temperature)
+summary(boys)
+
+girls<- lm(temp$female~temp$body_temperature)
+summary(girls)
+
+#unpaired ttest for analysis between the groups
+
+t.test(temp$male, temp$female, data = temp, paired = FALSE)
+
+
+
+
+
+```
+
+###Inferences
+
+* The heart rate increases with increasing body temperature in both males and females. This increase is steeper in females (p=0.02) compared to males (p=0.13) when asessed individually using linear regression models. 
+
+###Outcomes
+* t=-0.63
+  df=116.70
+  p=0.53
+
+* There is no difference between the two goups when it comes to the relationship between heart rate and body temperature. They both show the same pattern of association. We accept the null hypothesis. 
+
+***
+
+#Question 2
+##Intoxication
+
+* Null Hypothesis-There is no relation between the handedness and the ataxic walking. 
+* Alternative Hypothesis- There is a relationship between handednes and ataxic walking.
+
+* The data is nominal categorical. There is one group. I will use a chisq test for analysis of the direction pf first stumble as well as final position. the results from these two will help answer the final question.
+
+* Test assumptions- random sampling
+                    there is a large sample
+                    the observations are independent
+                    
+```{r echo=TRUE}
+intox <- read.csv('question2.csv')
+intox
+
+#summary stats
+dim(intox)
+head(intox)
+tail(intox)
+summary(intox)
+
+
+#1dominant hand vs direction of first stumble analysis
+intox2 <- xtabs(~ intox$handedness + intox$first_stumble, data = intox)
+intox2
+
+#plot
+barplot(intox2, beside = TRUE, xlab = 'direction of first stumble (0=left, 1=right)', ylab = 'frequency', main = 'Handedness vs the Direction of first stumble in Intoxicated individuals.', col = c('red', 'orange'))
+legend('top', c('Left handed', 'Right handed'), fill = c('red', 'orange'))
+
+
+#stats test 
+chisq.test(intox2, correct = TRUE)
+
+
+
+#2handedness vs final position analysis
+intox3 <- xtabs(~ intox$handedness + intox$final_position, data=intox)
+intox3
+
+#plot
+barplot(intox3, beside = TRUE, xlab = 'final position (0=left of line, 1=right of line)', ylab = 'frequency', main = 'Handedness vs the Final position relative to the line in Intoxicated individuals.', col = c('blue', 'green'))
+legend('top', c('Left handed', 'Right handed'), fill = c('blue', 'green'))
+
+#stats test
+chisq.test(intox3, correct = TRUE)
+
+
+```
+
+###Outcomes
+* 1- chisq(24.64)
+    df=1
+    p-value = 6.913e-07
+  The handedness and direction of first stumble have an association. For example, most left handed people stumbled to the left side.
+  
+* 2- chisq(3.58)
+    df=1
+    p-value = 0.0583
+  There was a trend for handedness and final position. For example, most left handed people ended up on the left side relative to the line.
+  
+* Handedness has a significant association with the direction of first stumble, and a trend effect on the final position relative to the line. 
+
+***
+
+#Question 3
+##Runner
+
+* Null Hypothesis-The runnnig time has no association with the calories consumed.
+* Alternative Hypothesis- Running time has an association with the calories consumed. 
+
+* This data is continuous and paired. Since we are trying to predict, I will use linear regression.
+
+* Test assumptions- the residuals are normally distributed
+                    the x variables were measured with no error
+                    there is a linear trend between x and y
+
+
+```{r echo=TRUE}
+runner <- read.csv('question3.csv')
+runner
+
+#summary stats
+dim(runner)
+head(runner)
+tail(runner)
+summary(runner)
+
+#plot to assess for linear relationship
+plot(runner$time, runner$calories, pch = 8, col = 'maroon', xlab = 'Running Time (s)', ylab = 'Calories Consumed (cal)', main = 'The relationship between running time and calories consumed in an amateur runner.')
+abline(lm(runner$calories~runner$time, data = runner))
+
+#stats test
+runner2 <- lm(runner$calories~runner$time, data = runner)
+summary(runner2)
+
+#test diagnostics
+qqnorm(runner2$residuals, pch = 7, col = 'blue')
+qqline(runner2$residuals)
+
+plot(runner2$fitted.values, runner2$residuals, xlab = 'Fitted Values', ylab = 'Residuals', main = 'Fitted values vs Residuals', pch = 2, col = 'magenta')
+abline(h=0)
+
+```
+
+###Outcomes
+* lm=14.22
+  df=1
+  p-value: 0.0015
+
+* The running time and calories consumed have a negative linear relationship. As the time increases, the calories consumed decrease. Because of the linear relationship, it is possible for the runner to use her running time to predict the number of calories she consumed. 
+ The calories consumed during a 30 minute run would be 440 cal.
+ -We reject the null hypothesis. 

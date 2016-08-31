@@ -1,0 +1,2 @@
+"0","qqline(runner2$residuals)"
+"0","plot(runner2$fitted.values, runner2$residuals, xlab = 'Fitted Values', ylab = 'Residuals', main = 'Fitted values vs Residuals', pch = 2, col = 'magenta')"

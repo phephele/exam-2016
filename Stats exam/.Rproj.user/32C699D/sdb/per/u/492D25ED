@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "---\nauthor: \"Sihle Dakile\"\ntitle: \"Stats exam\"\noutput: github_document\n---\n#Question 1\n##Body Temp in Males and Females\n\n*Null Hypothesis- There is no difference of body temperature between males and females.\n*Alternative Hypothesis- There is a difference in body temperature between males and females.\n\n```{r data_import, data_tidy, echo=TRUE}\ntemp <- read.csv('question1.csv')\ntemp\n\n\n\n```\n\n## GitHub Documents\n\nThis is an R Markdown format used for publishing markdown documents to GitHub. When you click the **Knit** button all R code chunks are run and a markdown file (.md) suitable for publishing to GitHub is generated.\n\n## Including Code\n\nYou can include R code in the document as follows:\n\n```{r cars}\nsummary(cars)\n```\n\n## Including Plots\n\nYou can also embed plots, for example:\n\n```{r pressure, echo=FALSE}\nplot(pressure)\n```\n\nNote that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.\n",
+    "created" : 1472628683481.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "4005189373",
+    "id" : "492D25ED",
+    "lastKnownWriteTime" : 2481051765037560417,
+    "last_content_update" : 1472629529410,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "chunk_rendered_width" : "650",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
